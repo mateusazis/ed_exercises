@@ -1,6 +1,6 @@
 #include "list.h"
 #include <stdio.h>
-
+ 
 #define __MAIN__ t1
 
 void t1(){

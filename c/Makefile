@@ -1,10 +1,13 @@
 FLAGS=-ansi
 
-all: list.o main.c
-	gcc main.c list.o node.o -omain $(FLAGS)
+all: main.o
+	gcc main.o list.o node.o -omain $(FLAGS)
+
+main.o: list.o main.c list.h
+	gcc main.c -c $(FLAGS)
 
 list.o: node.o list.c list.h
-	gcc list.c -c
+	gcc list.c -c $(FLAGS)
 
 node.o: node.c node.h
-	gcc node.c -c
+	gcc node.c -c $(FLAGS)
