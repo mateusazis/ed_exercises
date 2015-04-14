@@ -3,14 +3,16 @@
 
 typedef struct Node Node;
 
-struct Node {
-  union {
+typedef union {
     int i;
     double d;
     char* s;
     char c;
     void* p;
-  } value;
+} ListValue_t;
+
+struct Node {
+  ListValue_t value;
   Node* next;
 };
 

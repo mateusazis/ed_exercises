@@ -5,4 +5,4 @@
 
 extern List* llist_new();
 
-#endif
+#endif /* LLIST_H */
