@@ -1,6 +1,7 @@
 #include "list.h"
 #include "llist.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 #define __MAIN__ t1
 
@@ -10,15 +11,20 @@ void t1(){
   list_addi(l, 20);
   list_addi(l, 30);
   int i;
-  for(i = 0; i < 30000; i++){
+  for(i = 0; i < 10000000; i++){
       list_addi(l, i);
   }
+  char t[100];
   // list_print(l);
+
+  puts("enter");
+  gets(t);
   // list_removeAt(l, 1);
   // list_print(l);
-  list_invert(l);
+  // list_invert(l);
   // list_print(l);
   list_free(l);
+  puts("enter");
   gets(t);
 }
 
@@ -40,6 +46,7 @@ void t2(){
   list_print(l);
   list_free(l);
 }
+
 
 extern void __MAIN__();
 

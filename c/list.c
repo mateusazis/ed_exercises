@@ -1,6 +1,4 @@
 #include "list.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 void list_addi(List* l, int val){
     l->impl->addi(l, val);

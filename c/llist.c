@@ -11,17 +11,16 @@ typedef struct {
 static void llist_addi(List* l, int val){
     GET_DATA(l);
 
-    Node* n = data->first;
     Node* new_node = (Node*)malloc(sizeof(Node));
     new_node->value.i = val;
     new_node->next = NULL;
-    while(n && n->next)
-      n = n->next;
 
-    if(n)
-      n->next = new_node;
-    else
-      data->first = new_node;
+    if(!data->first)
+        data->first = new_node;
+    if(data->last)
+        data->last->next = new_node;
+
+    data->last = new_node;
     l->size++;
 }
 
@@ -40,6 +39,8 @@ static void llist_removeAt(List* l, int index){
       }
       toRemove = n->next;
       n->next = toRemove->next;
+      if(index == l->size - 1)
+        data->last = n;
       free(toRemove);
     }
     l->size--;
