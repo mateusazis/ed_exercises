@@ -1,23 +1,29 @@
 #include "list.h"
+#include "llist.h"
 #include <stdio.h>
- 
+
 #define __MAIN__ t1
 
 void t1(){
-  List* l = list_new();
+  List* l = llist_new();
   list_addi(l, 10);
   list_addi(l, 20);
   list_addi(l, 30);
-  list_print(l);
+  int i;
+  for(i = 0; i < 30000; i++){
+      list_addi(l, i);
+  }
+  // list_print(l);
+  // list_removeAt(l, 1);
+  // list_print(l);
   list_invert(l);
-  list_print(l);
-  list_removeAt(l, 1);
-  list_print(l);
+  // list_print(l);
   list_free(l);
+  gets(t);
 }
 
 void t2(){
-  List* l = list_new();
+  List* l = llist_new();
   int i;
   for(i = 0; i < 100; i++)
     list_addi(l, i);

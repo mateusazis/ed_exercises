@@ -5,11 +5,23 @@
 
 typedef enum { INTEGER, DOUBLE, STRING, POINTER, NONE } ListType;
 
+typedef struct List List;
+
 typedef struct {
-  Node* first;
+    void (*addi)(List* l, int val);
+    void (*removeAt)(List* l, int index);
+    void (*print)(List* l);
+    void (*invert)(List* l);
+    void (*free)(List* l);
+} _ListInterface;
+
+struct List{
+  void* data;
+
   int size;
   ListType type;
-} List;
+  _ListInterface* impl;
+};
 
 extern List* list_new();
 extern void list_addi(List* l, int val);
