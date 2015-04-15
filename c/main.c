@@ -5,9 +5,15 @@
 #include <assert.h>
 
 #define assert_this(a) assert(a); test_count++;
+
 #define LIST_TEST(l, ...) void list_test(){\
   {List* l = llist_new(); __VA_ARGS__ }\
   {List* l = alist_new(); __VA_ARGS__ }\
+}
+
+#define STACK_TEST(s, ...) void stack_test(){\
+  {Stack* s = lstack_new(); __VA_ARGS__ }\
+  {Stack* s = astack_new(); __VA_ARGS__ }\
 }
 
 #define __MAIN__ list_test
@@ -36,31 +42,37 @@ LIST_TEST(l,
   list_free(l);
 )
 
-void stack_test(){
-    Stack* s = lstack_new();
-
+STACK_TEST(s,
     stack_pushi(s, 10);
     stack_pushi(s, 20);
     stack_pushi(s, 30);
+    assert_this(s->size == 3);
     assert_this(stack_topi(s) == 30);
+
     stack_pop(s);
+    assert_this(s->size == 2);
     assert_this(stack_topi(s) == 20);
+
     stack_pushi(s, 40);
+    assert_this(s->size == 3);
     assert_this(stack_topi(s) == 40);
+
     stack_pop(s);
     assert_this(stack_topi(s) == 20);
     stack_pop(s);
     assert_this(stack_topi(s) == 10);
     stack_pop(s);
+    assert_this(s->size == 0);
 
     stack_free(s);
-}
+);
 
 
 extern void __MAIN__();
 
 int main(){
-  __MAIN__();
+  list_test();
+  stack_test();
   printf("Finished with %d successful assertions.\n", test_count);
   return 0;
 }

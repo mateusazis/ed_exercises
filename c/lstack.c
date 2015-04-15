@@ -13,11 +13,13 @@ static void lstack_pushi(Stack* s, int val){
   new_node->next = n;
 
   s->data = new_node;
+  s->size++;
 }
 static void lstack_pop(Stack* s){
   GET_DATA(Node* n, s);
 
   s->data = n->next;
+  s->size--;
 
   free(n);
 }
@@ -54,6 +56,7 @@ Stack* lstack_new(){
     s->data = NULL;
     s->type = NONE;
     s->impl = &implementation;
+    s->size = 0;
 
     return s;
 }
