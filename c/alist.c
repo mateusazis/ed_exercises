@@ -1,7 +1,8 @@
-#include "alist.h"
-#include "node.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "list.h"
+#include "node.h"
 
 #define GET_DATA(l) AListData* data = (AListData*)l->data;
 #define max(a,b) (a > b ? a : b)
@@ -18,10 +19,8 @@ static void alist_addi(List* l, int val){
         int newCap = max((int)(data->capacity * 1.1f), data->capacity + 10);
         data->values = (ListValue_t*)realloc(data->values, newCap*sizeof(ListValue_t));
         data->capacity = newCap;
-        printf("Capacity to %d\n", newCap);
     }
     data->values[l->size].i = val;
-    printf("added %d\n", val);
     l->size++;
 }
 

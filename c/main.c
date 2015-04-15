@@ -1,6 +1,4 @@
 #include "list.h"
-#include "llist.h"
-#include "alist.h"
 #include <stdio.h>
 #include <stdlib.h>
 

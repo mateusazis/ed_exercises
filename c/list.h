@@ -23,7 +23,9 @@ struct List{
   _ListInterface* impl;
 };
 
-extern List* list_new();
+extern List* llist_new();
+extern List* alist_new();
+
 extern void list_addi(List* l, int val);
 extern void list_removeAt(List* l, int index);
 extern void list_print(List* l);

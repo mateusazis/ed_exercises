@@ -1,6 +1,7 @@
-#include "llist.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "list.h"
 
 #define GET_DATA(l) LListData* data = (LListData*)l->data;
 
