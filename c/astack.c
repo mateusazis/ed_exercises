@@ -38,6 +38,8 @@ static int astack_topi(Stack* s){
 
 static void astack_free(Stack* s){
   GET_DATA(AStackData* data, s);
+
+  free(data->values);
   free(s->data);
   free(s);
 }

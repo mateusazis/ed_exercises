@@ -1,8 +1,10 @@
-#include "list.h"
-#include "stack.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+
+#include "list.h"
+#include "stack.h"
+#include "queue.h"
 
 #define assert_this(a) assert(a); test_count++;
 
@@ -14,6 +16,11 @@
 #define STACK_TEST(s, ...) void stack_test(){\
   {Stack* s = lstack_new(); __VA_ARGS__ }\
   {Stack* s = astack_new(); __VA_ARGS__ }\
+}
+
+#define QUEUE_TEST(s, ...) void queue_test(){\
+  {Queue* s = lqueue_new(); __VA_ARGS__ }\
+  {Queue* s = aqueue_new(); __VA_ARGS__ }\
 }
 
 #define __MAIN__ list_test
@@ -67,12 +74,38 @@ STACK_TEST(s,
     stack_free(s);
 );
 
+QUEUE_TEST(q,
+    queue_addi(q, 10);
+    queue_addi(q, 20);
+    queue_addi(q, 30);
+    assert_this(q->size == 3);
+    assert_this(queue_fronti(q) == 10);
+
+    queue_remove(q);
+    assert_this(q->size == 2);
+    assert_this(queue_fronti(q) == 20);
+
+    queue_addi(q, 40);
+    assert_this(q->size == 3);
+    assert_this(queue_fronti(q) == 20);
+
+    queue_remove(q);
+    assert_this(queue_fronti(q) == 30);
+    queue_remove(q);
+    assert_this(queue_fronti(q) == 40);
+    queue_remove(q);
+    assert_this(q->size == 0);
+
+    queue_free(q);
+);
+
 
 extern void __MAIN__();
 
 int main(){
   list_test();
   stack_test();
+  queue_test();
   printf("Finished with %d successful assertions.\n", test_count);
   return 0;
 }
