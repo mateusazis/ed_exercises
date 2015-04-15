@@ -1,8 +1,10 @@
 #include "list.h"
+#include "stack.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
-#define __MAIN__ t2
+#define __MAIN__ stack_test
 
 void t1(){
   List* l = llist_new();
@@ -31,6 +33,26 @@ void t2(){
     list_invert(l);
     list_print(l);
     list_free(l);
+}
+
+void stack_test(){
+    Stack* s = lstack_new();
+
+    stack_pushi(s, 10);
+    stack_pushi(s, 20);
+    stack_pushi(s, 30);
+    assert(stack_topi(s) == 30);
+    stack_pop(s);
+    assert(stack_topi(s) == 20);
+    stack_pushi(s, 40);
+    assert(stack_topi(s) == 40);
+    stack_pop(s);
+    assert(stack_topi(s) == 20);
+    stack_pop(s);
+    assert(stack_topi(s) == 10);
+    stack_pop(s);
+
+    stack_free(s);
 }
 
 
