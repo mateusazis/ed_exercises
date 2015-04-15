@@ -20,7 +20,7 @@
 
 #define QUEUE_TEST(s, ...) void queue_test(){\
   {Queue* s = lqueue_new(); __VA_ARGS__ }\
-  {Queue* s = aqueue_new(); __VA_ARGS__ }\
+  {Queue* s = aqueue_new(100); __VA_ARGS__ }\
 }
 
 #define __MAIN__ list_test

@@ -3,13 +3,12 @@
 
 #include "Queue.h"
 
-#define AQUEUE_CAPACITY 2048
 #define GET_DATA(v, l) v = (AQueueData*)l->data;
 #define max(a,b) (a > b ? a : b)
 
 typedef struct {
   ListValue_t* values;
-  int start, end;
+  int start, end, capacity;
 } AQueueData;
 
 
@@ -24,7 +23,7 @@ static void aqueue_addi(Queue* q, int val){
 static void aqueue_remove(Queue* q){
   GET_DATA(AQueueData* data, q);
 
-  data->start = (data->start + 1) % AQUEUE_CAPACITY;
+  data->start = (data->start + 1) % data->capacity;
 
   q->size--;
 }
@@ -43,7 +42,7 @@ static void aqueue_free(Queue* q){
   free(q);
 }
 
-Queue* aqueue_new(){
+Queue* aqueue_new(int capacity){
     static _QueueInterface implementation = {
         aqueue_addi,
         aqueue_remove,
@@ -53,8 +52,9 @@ Queue* aqueue_new(){
 
     Queue* q = (Queue*)malloc(sizeof(Queue));
     AQueueData* data = (AQueueData*)malloc(sizeof(AQueueData));
-    data->values = (ListValue_t*)calloc(AQUEUE_CAPACITY, sizeof(ListValue_t));
+    data->values = (ListValue_t*)calloc(capacity, sizeof(ListValue_t));
     data->start = data->end = 0;
+    data->capacity = capacity;
 
     q->data = data;
     q->type = NONE;
