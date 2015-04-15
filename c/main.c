@@ -5,13 +5,16 @@
 #include <assert.h>
 
 #define assert_this(a) assert(a); test_count++;
+#define LIST_TEST(l, ...) void list_test(){\
+  {List* l = llist_new(); __VA_ARGS__ }\
+  {List* l = alist_new(); __VA_ARGS__ }\
+}
 
-#define __MAIN__ stack_test
+#define __MAIN__ list_test
 
 static int test_count = 0;
 
-void t1(){
-  List* l = llist_new();
+LIST_TEST(l,
   list_addi(l, 10);
   list_addi(l, 20);
   list_addi(l, 30);
@@ -28,23 +31,10 @@ void t1(){
   assert_this(list_geti(l, 0) == 30);
   assert_this(list_geti(l, 1) == 10);
 
+  assert_this(l->size == 2);
+
   list_free(l);
-}
-
-void t2(){
-    List* l = alist_new();
-    int i;
-    for(i = 0; i < 15; i++)
-        list_addi(l, i);
-    list_print(l);
-
-    list_removeAt(l, 1);
-    list_removeAt(l, 7);
-    list_print(l);
-    list_invert(l);
-    list_print(l);
-    list_free(l);
-}
+)
 
 void stack_test(){
     Stack* s = lstack_new();
