@@ -24,6 +24,12 @@ static void alist_addi(List* l, int val){
     l->size++;
 }
 
+static ListValue_t alist_getAt(List* l, int index){
+  GET_DATA(l);
+
+  return data->values[index];
+}
+
 static void alist_removeAt(List* l, int index){
     GET_DATA(l);
 
@@ -73,6 +79,7 @@ static void alist_free(List* l){
 List* alist_new(){
     static _ListInterface implementation = {
         alist_addi,
+        alist_getAt,
         alist_removeAt,
         alist_print,
         alist_invert,

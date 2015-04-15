@@ -25,6 +25,16 @@ static void llist_addi(List* l, int val){
     l->size++;
 }
 
+static ListValue_t llist_getAt(List* l, int index){
+  GET_DATA(l)
+  Node* n = data->first;
+
+  while(index--)
+    n = n->next;
+
+  return n->value;
+}
+
 static void llist_removeAt(List* l, int index){
     GET_DATA(l);
 
@@ -91,6 +101,7 @@ static void llist_free(List* l){
 List* llist_new(){
     static _ListInterface implementation = {
         llist_addi,
+        llist_getAt,
         llist_removeAt,
         llist_print,
         llist_invert,

@@ -9,6 +9,7 @@ typedef struct List List;
 
 typedef struct {
     void (*addi)(List* l, int val);
+    ListValue_t (*getAt)(List* l, int index);
     void (*removeAt)(List* l, int index);
     void (*print)(List* l);
     void (*invert)(List* l);
@@ -27,6 +28,7 @@ extern List* llist_new();
 extern List* alist_new();
 
 extern void list_addi(List* l, int val);
+extern int list_geti(List* l, int index);
 extern void list_removeAt(List* l, int index);
 extern void list_print(List* l);
 extern void list_invert(List* l);
